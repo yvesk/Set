@@ -12,6 +12,9 @@
 		A3ECEE112124A15500B649BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3ECEE0F2124A15500B649BF /* Main.storyboard */; };
 		A3ECEE132124A15700B649BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3ECEE122124A15700B649BF /* Assets.xcassets */; };
 		A3ECEE162124A15700B649BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3ECEE142124A15700B649BF /* LaunchScreen.storyboard */; };
+		A3ECEE1F2124A17B00B649BF /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3ECEE1E2124A17B00B649BF /* Set.swift */; };
+		A3ECEE212124A1F300B649BF /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3ECEE202124A1F300B649BF /* Card.swift */; };
+		A3ECEE252124A60B00B649BF /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3ECEE242124A60B00B649BF /* ArrayExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		A3ECEE122124A15700B649BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3ECEE152124A15700B649BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3ECEE172124A15700B649BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3ECEE1E2124A17B00B649BF /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		A3ECEE202124A1F300B649BF /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		A3ECEE242124A60B00B649BF /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,9 +65,20 @@
 				A3ECEE0F2124A15500B649BF /* Main.storyboard */,
 				A3ECEE122124A15700B649BF /* Assets.xcassets */,
 				A3ECEE142124A15700B649BF /* LaunchScreen.storyboard */,
+				A3ECEE1D2124A16800B649BF /* Supporting Files */,
 				A3ECEE172124A15700B649BF /* Info.plist */,
+				A3ECEE1E2124A17B00B649BF /* Set.swift */,
+				A3ECEE202124A1F300B649BF /* Card.swift */,
+				A3ECEE242124A60B00B649BF /* ArrayExtension.swift */,
 			);
 			path = Set;
+			sourceTree = "<group>";
+		};
+		A3ECEE1D2124A16800B649BF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +154,9 @@
 			files = (
 				A3ECEE0E2124A15500B649BF /* ViewController.swift in Sources */,
 				A3ECEE0C2124A15500B649BF /* AppDelegate.swift in Sources */,
+				A3ECEE252124A60B00B649BF /* ArrayExtension.swift in Sources */,
+				A3ECEE1F2124A17B00B649BF /* Set.swift in Sources */,
+				A3ECEE212124A1F300B649BF /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
