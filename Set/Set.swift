@@ -127,7 +127,9 @@ struct Set
         if isMatch() {
             replaceSelectedCardsWithCardsFromDeck()
         } else {
-            cardsOnTable += deck.removeRandom(numberOfElements: min(cardsOnTable.count, 3))
+            if deck.count > 0 {
+                cardsOnTable += deck.removeRandom(numberOfElements: min(deck.count, 3))
+            }
         }
     }
     

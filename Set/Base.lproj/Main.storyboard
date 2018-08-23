@@ -54,7 +54,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9y-ED-Gu3" customClass="UIContainerView">
                                 <rect key="frame" x="0.0" y="104" width="414" height="598.33333333333337"/>
-                                <color key="backgroundColor" red="1" green="0.45083420693497445" blue="0.59095143583575171" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.98584807470662916" green="0.95728567534973907" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="oiU-ck-SWA" appends="YES" id="dNW-DQ-lbO"/>
