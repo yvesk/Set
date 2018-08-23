@@ -61,7 +61,10 @@ class CardView: UIView {
     
     @IBInspectable
     var color: UIColor = UIColor.red
-    
+
+    @IBInspectable
+    var cardColor: UIColor = #colorLiteral(red: 0.9997671247, green: 0.9994738698, blue: 0.9999297261, alpha: 1)
+
     @IBInspectable
     var rank: Int = 1
     
@@ -72,7 +75,6 @@ class CardView: UIView {
     var face: Face = .squiggle
     
     func createSquigglePath(at offset: CGPoint, scaleXBy: CGFloat, scaleYBy: CGFloat) -> UIBezierPath {
-        print (offset, scaleXBy, scaleYBy)
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 97, y: 5))
         
@@ -123,7 +125,7 @@ class CardView: UIView {
         let cgContext = UIGraphicsGetCurrentContext()!
         
         var path = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width * 0.1)
-        UIColor.yellow.setFill()
+        cardColor.setFill()
         UIColor.lightGray.setStroke()
         path.fill()
         path.stroke()
@@ -160,7 +162,6 @@ class CardView: UIView {
                 path.addClip()
                 let yEnd = 1 * yScaleFactor
                 for lineX in stride(from: 0, to: 3.0 * xScaleFactor, by: path.lineWidth * 2) {
-                    print(lineX)
                     path.move(to: CGPoint(x:lineX + xStart, y: yStart - (0.0 * yScaleFactor)))
                     path.addLine(to: CGPoint(x: lineX + xStart, y: yStart + yEnd))
                 }

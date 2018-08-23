@@ -11,16 +11,35 @@ import UIKit
 class ViewController: UIViewController {
 
     var set = Set()
-    
+    var grid = Grid(layout: .aspectRatio(5.0/8.0))
     @IBOutlet weak var dealThreeCardsButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet var cardButtons: [UIButton]!
+
+    
+    @IBOutlet weak var cardContainer: UIView!
+    
     
     override func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
+        
+        let swipeRecognizer = UISwipeGestureRecognizer (
+            target: self, action: #selector(ViewController.swipe(recognizer:))
+        )
+        swipeRecognizer.direction = .down
+        view.addGestureRecognizer(swipeRecognizer)
+
     }
     
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        coordinator.animate(alongsideTransition: { (_) in
+        }, completion: { _ in
+            self.updateUI()
+        })
+        
+        super.willTransition(to: newCollection, with: coordinator)
+    }
     @IBAction func newGameTouched(_ sender: Any){
         set = Set()
         updateUI()
@@ -31,67 +50,98 @@ class ViewController: UIViewController {
         updateUI()
     }
     
-    @IBAction func cardTouched(_ sender: UIButton) {
-        if let selectedButtonIndex = cardButtons.index(of: sender) {
-            set.chooseCard(card: set.cardsOnTable[selectedButtonIndex])
+    
+    fileprivate func configure(_ cardView: CardView, with card: Card) {
+        cardView.isOpaque = false
+        cardView.rank = card.number
+        
+        switch card.color {
+        case .red:
+            cardView.color = UIColor.red
+        case .black:
+            cardView.color = UIColor.green
+        case .blue:
+            cardView.color = UIColor.blue
+        }
+        
+        switch card.shading {
+        case .open:
+            cardView.fill = .empty
+        case .solid:
+            cardView.fill = .solid
+        case .striped:
+            cardView.fill = .striped
+        }
+        
+        switch card.symbol {
+        case .circle:
+            cardView.face = .oval
+        case .square:
+            cardView.face = .diamond
+        case .triangle:
+            cardView.face = .squiggle
+        }
+        
+        if set.cardIsSelected(card: card) {
+            if set.selectedCardCount == 3 {
+                cardView.cardColor = set.isMatch() ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1) : #colorLiteral(red: 0.9098039269, green: 0.7191671618, blue: 0.7026784244, alpha: 1)
+            } else {
+                cardView.cardColor =  #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            }
+        } else {
+            cardView.cardColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
+    }
+    
+    var cardViewToCardMap = [CardView : Card]()
+    private func updateUI() {
+        dealThreeCardsButton.isEnabled = set.canDealThree
+        scoreLabel.text = "Score: \(set.score)"
+        
+        grid.cellCount = set.cardsOnTable.count
+        grid.frame = cardContainer.bounds;
+        
+        for cardView in cardContainer.subviews.reversed() {
+            cardView.removeFromSuperview()
+        }
+        cardViewToCardMap.removeAll()
+        
+        for cardIdx in set.cardsOnTable.indices {
+            let card = set.cardsOnTable[cardIdx]
+            let cardView = CardView(frame: grid[cardIdx]!.insetBy(dx: 5, dy: 5))
+            cardViewToCardMap[cardView] = card
+            configure(cardView, with: card)
+
+            let tapRecognizer = UITapGestureRecognizer (
+                target: self, action: #selector(ViewController.tap(recognizer:))
+            )
+            cardView.addGestureRecognizer(tapRecognizer)
+            
+            cardContainer.addSubview(cardView)
+        }
+    }
+
+    @IBAction func rotate(_ recognizer: UIRotationGestureRecognizer) {
+        if recognizer.state == .ended {
+            set.shuffle()
             updateUI()
         }
     }
     
-    private func attributedString(for card:Card) -> NSAttributedString {
-        var symbols = ""
-        for _ in 1...card.number {
-            symbols += card.symbol.rawValue
+    @objc private func swipe(recognizer: UISwipeGestureRecognizer) {
+        if recognizer.state == .ended {
+            set.drawThreeCards()
+            updateUI()
         }
-
-        var attribs = [NSAttributedStringKey : Any]()
-        let color: UIColor
-        switch card.color {
-            case .red:
-                color = #colorLiteral(red: 0.9626258264, green: 0.05161305742, blue: 0.1408702286, alpha: 1)
-            case .black:
-                color = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            case .blue:
-                color = #colorLiteral(red: 0, green: 0.4359109956, blue: 1, alpha: 1)
-        }
-        switch card.shading {
-            case .solid:
-                attribs[NSAttributedStringKey.foregroundColor] = color
-                attribs[NSAttributedStringKey.strokeWidth] = -1
-            case .open:
-                attribs[NSAttributedStringKey.foregroundColor] = color
-                attribs[NSAttributedStringKey.strokeWidth] = 20
-            case .striped:
-                attribs[NSAttributedStringKey.foregroundColor] = color.withAlphaComponent(0.15)
-                attribs[NSAttributedStringKey.strokeWidth] = -1
-        }
-        
-        let attrString = NSAttributedString(string: symbols, attributes: attribs)
-        return attrString
     }
     
-    private func updateUI() {
-        let isMatch = set.isMatch()
-        for cardIndex in set.cardsOnTable.indices {
-            let cardButton = cardButtons[cardIndex]
-            let card = set.cardsOnTable[cardIndex]
-            cardButton.isHidden = false
-            
-            cardButton.setAttributedTitle(attributedString(for: card), for: .normal)
-            
-            let selected = set.cardIsSelected(card: card)
-            cardButton.layer.borderColor = selected ? (isMatch ? #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1): #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)) : #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)
-            cardButton.layer.borderWidth = selected ? 3 : 1
-            cardButton.layer.cornerRadius = 8.0
+    @objc private func tap(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .ended {
+            if let card = cardViewToCardMap[recognizer.view as! CardView] {
+                set.chooseCard(card: card)
+                updateUI()
+            }
         }
-        
-        for indexToHide in set.cardsOnTable.count..<cardButtons.count  {
-            cardButtons[indexToHide].isHidden = true
-        }
-        
-        dealThreeCardsButton.isEnabled = set.canDealThree
-        
-        scoreLabel.text = "Score: \(set.score)"
     }
 }
 

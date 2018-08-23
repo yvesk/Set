@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A37B1E4121273DAD0038C678 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37B1E4021273DAD0038C678 /* CardView.swift */; };
+		A3A5E732212E00B700307B37 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A5E731212E00B600307B37 /* Grid.swift */; };
 		A3ECEE0C2124A15500B649BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3ECEE0B2124A15500B649BF /* AppDelegate.swift */; };
 		A3ECEE0E2124A15500B649BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3ECEE0D2124A15500B649BF /* ViewController.swift */; };
 		A3ECEE112124A15500B649BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3ECEE0F2124A15500B649BF /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A37B1E4021273DAD0038C678 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		A3A5E731212E00B600307B37 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		A3ECEE082124A15500B649BF /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3ECEE0B2124A15500B649BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3ECEE0D2124A15500B649BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,16 +64,15 @@
 		A3ECEE0A2124A15500B649BF /* Set */ = {
 			isa = PBXGroup;
 			children = (
-				A3ECEE0B2124A15500B649BF /* AppDelegate.swift */,
+				A3ECEE1D2124A16800B649BF /* Supporting Files */,
 				A3ECEE0D2124A15500B649BF /* ViewController.swift */,
 				A3ECEE0F2124A15500B649BF /* Main.storyboard */,
-				A3ECEE122124A15700B649BF /* Assets.xcassets */,
-				A3ECEE142124A15700B649BF /* LaunchScreen.storyboard */,
-				A3ECEE1D2124A16800B649BF /* Supporting Files */,
+				A37B1E4021273DAD0038C678 /* CardView.swift */,
 				A3ECEE172124A15700B649BF /* Info.plist */,
 				A3ECEE1E2124A17B00B649BF /* Set.swift */,
 				A3ECEE202124A1F300B649BF /* Card.swift */,
 				A3ECEE242124A60B00B649BF /* ArrayExtension.swift */,
+				A3A5E731212E00B600307B37 /* Grid.swift */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -77,6 +80,9 @@
 		A3ECEE1D2124A16800B649BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A3ECEE142124A15700B649BF /* LaunchScreen.storyboard */,
+				A3ECEE0B2124A15500B649BF /* AppDelegate.swift */,
+				A3ECEE122124A15700B649BF /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -155,7 +161,9 @@
 				A3ECEE0E2124A15500B649BF /* ViewController.swift in Sources */,
 				A3ECEE0C2124A15500B649BF /* AppDelegate.swift in Sources */,
 				A3ECEE252124A60B00B649BF /* ArrayExtension.swift in Sources */,
+				A3A5E732212E00B700307B37 /* Grid.swift in Sources */,
 				A3ECEE1F2124A17B00B649BF /* Set.swift in Sources */,
+				A37B1E4121273DAD0038C678 /* CardView.swift in Sources */,
 				A3ECEE212124A1F300B649BF /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

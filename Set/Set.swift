@@ -16,6 +16,12 @@ struct Set
     private var selectedCards = [Card]()
     var score = 0
     
+    var selectedCardCount: Int {
+        get {
+            return selectedCards.count
+        }
+    }
+    
     private mutating func createDeck() {
         for symbol in Card.Symbol.all {
             for color in Card.Color.all {
@@ -42,7 +48,7 @@ struct Set
     }
     
     var canDealThree: Bool {
-        get { return !deck.isEmpty && (isMatch() || cardsOnTable.count <= 21)}
+        get { return !deck.isEmpty }
     }
     
     func isMatch() -> Bool {
@@ -79,6 +85,11 @@ struct Set
             }
         }
     }
+    
+    mutating func shuffle() {
+        cardsOnTable.shuffle()
+    }
+    
     mutating func chooseCard(card: Card) {
         func validateTripplet() {
             if (isMatch()) {
@@ -115,8 +126,8 @@ struct Set
     mutating func drawThreeCards() {
         if isMatch() {
             replaceSelectedCardsWithCardsFromDeck()
-        } else if cardsOnTable.count <= 24 {
-            cardsOnTable += deck.removeRandom(numberOfElements: min(24 - cardsOnTable.count, 3))
+        } else {
+            cardsOnTable += deck.removeRandom(numberOfElements: min(cardsOnTable.count, 3))
         }
     }
     
